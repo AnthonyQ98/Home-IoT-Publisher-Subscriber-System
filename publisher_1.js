@@ -1,8 +1,8 @@
 const mqtt = require("mqtt");
 const client = mqtt.connect("mqtt://broker.hivemq.com:1883");
 
-const topics = ['tabaAnthonyQuinn/office/temperature', 'tabaAnthonyQuinn/office/humidity'];
-const interval = 5000; // publish every 5 seconds
+const topics = ['firstFloorAnthonyQuinnTaba/office/temperature', 'firstFloorAnthonyQuinnTaba/office/humidity'];
+const interval = 1000; // publish every second
 
 client.on("connect", () => {
   console.log("Publisher Connected to MQTT broker");
@@ -13,12 +13,12 @@ client.on("connect", () => {
     let message;
 
     switch (topic) {
-      case 'tabaAnthonyQuinn/office/temperature':
+      case 'firstFloorAnthonyQuinnTaba/office/temperature':
         message = JSON.stringify({
           temperature: (Math.random() * 30).toFixed(2),
         });
         break;
-      case 'tabaAnthonyQuinn/office/humidity':
+      case 'firstFloorAnthonyQuinnTaba/office/humidity':
         message = JSON.stringify({
           humidity: (Math.random() * 100).toFixed(2),
         });

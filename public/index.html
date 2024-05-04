@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IoT MQTT Dashboard</title>
+</head>
+<body>
+    <h1>Temperature Data</h1>
+    <div id="temperatureData">Waiting for the data</div>
+    <h1>Humidity Data</h1>
+    <div id="humidityData">Waiting for the data</div>
+    <h1>Lighting Data</h1>
+    <div id="lightingData">Waiting for the data</div>
+    <h1>Window Data</h1>
+    <div id="windowData">Waiting for the data</div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+        socket.on('firstFloorAnthonyQuinnTaba/office/temperature', function(msg) {
+            const data = JSON.parse(msg)
+            const temperature = data.temperature;
+            document.getElementById('temperatureData').innerHTML = `Temperature: ${temperature} Degree Celsius`;
+        });
+    
+        socket.on('firstFloorAnthonyQuinnTaba/office/humidity', function(msg) {
+            const data = JSON.parse(msg)
+            const humidity = data.humidity;
+            document.getElementById('humidityData').innerHTML = `Humidity: ${humidity} %`;
+        });
+    
+        socket.on('secondFloorAnthonyQuinnTaba/light/desk', function(msg) {
+            const data = JSON.parse(msg)
+            const lighting = data.lighting;
+            document.getElementById('lightingData').innerHTML = `Lighting: ${lighting}`;
+        });
+
+        socket.on('secondFloorAnthonyQuinnTaba/window/office', function(msg) {
+            const data = JSON.parse(msg)
+            const window = data.window;
+            document.getElementById('windowData').innerHTML = `Window: ${window}`;
+        });
+    </script>    
+</body>
+</html>
